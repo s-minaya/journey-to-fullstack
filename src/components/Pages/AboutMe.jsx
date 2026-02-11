@@ -1,5 +1,10 @@
+import Header from "../Layout/Header";
+
 function AboutMe() {
-  return <p>Soy la página AboutMe</p>;
+  return <>
+  <Header/>
+  <p>Soy la página AboutMe</p>
+  </>;
 }
 
 export default AboutMe;
