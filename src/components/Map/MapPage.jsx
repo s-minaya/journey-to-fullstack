@@ -5,6 +5,7 @@ import MapSlimeCompanion from "./MapSlimeCompanion";
 import ExperienceBar from "./ExperienceBar";
 import MapBackgroundMobile from "../../images/map-background-mobile.png";
 import { usePageIntro } from "../hooks/usePageIntro";
+import { useMapProgress } from "../hooks/useMapProgress";
 import "../../styles/Map/MapPage.scss";
 
 // ============================
@@ -77,14 +78,31 @@ const INITIAL_SLIME_TEXTS = [
   "¡Selecciona cualquier ubicación para saber más!",
 ];
 
+// ============================
+// Textos cuando se completa todo
+// ============================
+const COMPLETION_SLIME_TEXTS = [
+  "¡WOW! ¡Has explorado todo mi portfolio! ✧･ﾟ: *✧･ﾟ:*",
+  "Muchas gracias por tomarte el tiempo de visitarlo todo (｡♥‿♥｡)",
+  "¿Te gustaría contactar conmigo? ¡Visita la TABERNA!",
+];
+
 function MapPage() {
   const navigate = useNavigate();
   const { loading, backgroundVisible, contentVisible } = usePageIntro();
+  const { currentXP, maxXP, isMaxLevel, markLocationAsVisited, visitedLocations } = useMapProgress();
 
   // ============================
   // Estado que guarda la ubicación seleccionada
   // ============================
   const [selectedLocationId, setSelectedLocationId] = useState(null);
+
+  // ============================
+  // Verifica si una ubicación ya ha sido visitada
+  // ============================
+  const isLocationVisited = (locationId) => {
+    return visitedLocations.includes(locationId);
+  };
 
   // ============================
   // Maneja el click en cada ubicación
@@ -94,17 +112,26 @@ function MapPage() {
       // Primer toque: mostrar descripción de esta ubicación
       setSelectedLocationId(location.id);
     } else {
-      // Segundo toque: navegar a la página
+      // Segundo toque: marcar como visitada y navegar
+      markLocationAsVisited(location.id);
       navigate(location.route);
     }
   };
 
   // ============================
+  // Maneja el click en "Ir a contacto" del mensaje de completado
+  // ============================
+  const handleGoToContact = () => {
+    navigate("/map-contact");
+  };
+
+  // ============================
   // Textos para el slime companion
   // ============================
-  const slimeTexts = selectedLocationId
+  const slimeTexts = isMaxLevel
+    ? COMPLETION_SLIME_TEXTS
+    : selectedLocationId
     ? [
-        // Mostramos la descripción + instrucción
         `${LOCATIONS.find((loc) => loc.id === selectedLocationId).description} Toca de nuevo para entrar →`,
       ]
     : INITIAL_SLIME_TEXTS;
@@ -114,7 +141,7 @@ function MapPage() {
   return (
     <section className={`map ${backgroundVisible ? "map--visible" : ""}`}>
       {/* Barra de experiencia */}
-      <ExperienceBar visible={contentVisible} currentXP={0} maxXP={100} />
+      <ExperienceBar visible={contentVisible} currentXP={currentXP} maxXP={maxXP} />
 
       {/* Contenedor del mapa */}
       <div className="map__container">
@@ -134,14 +161,16 @@ function MapPage() {
           {LOCATIONS.map((location) => (
             <div
               key={location.id}
-              className={`map__location ${
-                location.className
-              } ${selectedLocationId === location.id ? "map__location--selected" : ""}`}
+              className={`map__location ${location.className} ${
+                selectedLocationId === location.id ? "map__location--selected" : ""
+              } ${isLocationVisited(location.id) ? "map__location--visited" : ""}`}
               onClick={() => handleLocationClick(location)}
               role="button"
               tabIndex={0}
               aria-label={
-                selectedLocationId === location.id
+                isLocationVisited(location.id)
+                  ? `${location.name} - Ya visitada`
+                  : selectedLocationId === location.id
                   ? `${location.name} - Selecciona de nuevo para entrar`
                   : `${location.name} - Selecciona para ver información`
               }
@@ -152,13 +181,22 @@ function MapPage() {
               }}
             >
               <span className="map__location-text">{location.name}</span>
+              {/* Indicador de visitada */}
+              {isLocationVisited(location.id) && (
+                <span className="map__location-badge">✓</span>
+              )}
             </div>
           ))}
         </div>
       </div>
 
       {/* Slime companion con textos dinámicos */}
-      <MapSlimeCompanion texts={slimeTexts} visible={contentVisible} />
+      <MapSlimeCompanion 
+        texts={slimeTexts} 
+        visible={contentVisible}
+        showContactButton={isMaxLevel}
+        onContactClick={handleGoToContact}
+      />
     </section>
   );
 }

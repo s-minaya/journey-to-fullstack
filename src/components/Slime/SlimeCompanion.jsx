@@ -4,7 +4,7 @@ import "../../styles/Slime/SlimeCompanion.scss";
 
 const TYPING_SPEED = 45;
 
-function SlimeCompanion({ texts = [], visible }) {
+function SlimeCompanion({ texts = [], visible, showContactButton = false, onContactClick }) {
   const [isTyping, setIsTyping] = useState(false);
   const [currentTextIndex, setCurrentTextIndex] = useState(0);
   const [displayedText, setDisplayedText] = useState("");
@@ -17,7 +17,6 @@ function SlimeCompanion({ texts = [], visible }) {
   useEffect(() => {
     // Si no hay textos, no hacemos nada
     if (!texts || texts.length === 0) return;
-
     // Reiniciamos al primer texto
     setCurrentTextIndex(0);
     setIsTyping(true);
@@ -35,14 +34,12 @@ function SlimeCompanion({ texts = [], visible }) {
     setShowBubble(true);
 
     const fullText = texts[currentTextIndex];
-    if (!fullText) return; 
+    if (!fullText) return;
 
     let charIndex = 0;
-
     intervalRef.current = setInterval(() => {
       charIndex++;
       setDisplayedText(fullText.slice(0, charIndex));
-
       if (charIndex >= fullText.length) {
         clearInterval(intervalRef.current);
       }
@@ -52,19 +49,16 @@ function SlimeCompanion({ texts = [], visible }) {
   }, [isTyping, currentTextIndex, texts]);
 
   // =============================
-  //      Click en el slime 
+  //      Click en el slime
   // =============================
   const handleSlimeClick = () => {
     clearInterval(intervalRef.current);
-
     if (!isTyping) {
       setCurrentTextIndex(0);
       setIsTyping(true);
       return;
     }
-
     const nextIndex = currentTextIndex + 1;
-
     if (nextIndex < texts.length) {
       setCurrentTextIndex(nextIndex);
     } else {
@@ -76,10 +70,20 @@ function SlimeCompanion({ texts = [], visible }) {
   };
 
   return (
-    <div className={`slime__container ${visible ? "slime__container--visible" : ""}`}>
+    <div
+      className={`slime__container ${visible ? "slime__container--visible" : ""}`}
+    >
       {showBubble && (
         <div className="slime__speech-bubble">
           <p className="slime__speech-text">{displayedText}</p>
+          {showContactButton && currentTextIndex === texts.length - 1 && (
+            <button 
+              className="slime__contact-button"
+              onClick={onContactClick}
+            >
+              IR A LA TABERNA →
+            </button>
+          )}
         </div>
       )}
       <img
