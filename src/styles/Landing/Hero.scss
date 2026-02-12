@@ -1,0 +1,126 @@
+// ==========================
+//           HERO
+// ==========================
+
+.hero {
+  width: 100%;
+  min-height: 100dvh;
+  background-color: var(--color-bg-main);
+  display: grid;
+  grid-template-rows: auto 1fr;
+  grid-template-areas:
+    "header"
+    "content";
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("../../images/background-mobile.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  &--visible::before {
+    animation: fadeInBackground 1.5s ease forwards;
+  }
+
+  &__content {
+    grid-area: content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    gap: 4rem;
+    padding: 2rem;
+    opacity: 0;
+    transform: scale(0.9);
+    transition: opacity 0.8s ease 0.5s, transform 0.8s ease 0.5s;
+
+    &--visible {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  &__button {
+    font-family: var(--font-main);
+    font-size: 3rem;
+    letter-spacing: 0.15rem;
+    color: var(--color-text-light);
+    text-decoration: none;
+    border: 3px solid var(--color-text-light);
+    border-radius: 10px;
+    padding: 1.5rem 3.5rem;
+    background: rgba(31, 41, 55, 0.7);
+    cursor: pointer;
+    transition: background 0.25s ease, color 0.25s ease, transform 0.2s ease,
+      box-shadow 0.25s ease;
+    backdrop-filter: blur(5px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+
+    &:hover {
+      background: var(--color-text-light);
+      color: var(--color-bg-main);
+      transform: scale(1.08);
+      box-shadow: 0 6px 20px rgba(255, 255, 255, 0.3);
+    }
+
+    &:active {
+      transform: scale(1.02);
+    }
+  }
+}
+
+/* RESPONSIVE */
+
+@media (min-width: 768px) {
+  .hero::before {
+    background-image: url("../../images/background.png");
+  }
+
+  .hero {
+    &__content {
+      align-items: flex-start;
+      gap: 5rem;
+    }
+
+    &__button {
+      align-self: center;
+      font-size: 3.4rem;
+      padding: 1.8rem 4.5rem;
+    }
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero {
+    &__content {
+      gap: 6rem;
+    }
+
+    &__button {
+      font-size: 4rem;
+      padding: 2rem 5.5rem;
+      border-width: 4px;
+    }
+  }
+}
+
+@media (min-width: 1440px) {
+  .hero {
+    &__content {
+      gap: 7rem;
+    }
+
+    &__button {
+      font-size: 4.5rem;
+      padding: 2.2rem 6.5rem;
+    }
+  }
+}

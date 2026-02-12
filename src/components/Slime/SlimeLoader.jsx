@@ -1,4 +1,5 @@
 import BlueSlime from "../../images/blue-slime.gif"
+import "../../styles/Slime/SlimeLoader.scss"
 function SlimeLoader() {
   return (
     <div className="slime-loader">

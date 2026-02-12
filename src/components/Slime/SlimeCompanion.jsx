@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import BlueSlime from "../../images/blue-slime.gif";
+import "../../styles/Slime/SlimeCompanion.scss"
 
 const TYPING_SPEED = 45;
 

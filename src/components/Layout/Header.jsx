@@ -1,4 +1,5 @@
 import { Link } from "react-router";
+import "../../styles/Layout/Header.scss"
 
 function Header({ visible, animated = false }) {
   return (
