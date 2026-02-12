@@ -1,0 +1,133 @@
+// ==========================
+//           MAP PAGE
+// ==========================
+.map {
+  width: 100%;
+  min-height: 100dvh;
+  background-color: var(--color-bg-main);
+  position: relative;
+  overflow-x: hidden;
+
+  // Contenedor principal del mapa
+  &__container {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  // Imagen de fondo del mapa
+  &__background {
+    width: 150%;
+    max-width: none;
+    height: auto;
+    display: block;
+    opacity: 0;
+    animation: fadeInBackground 1.5s ease 0.5s forwards;
+  }
+
+  // Contenedor de las ubicaciones
+  &__locations {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transform: scale(0.95);
+    transition:
+      opacity 0.8s ease 1s,
+      transform 0.8s ease 1s;
+
+    &--visible {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  // Estilos base para todas las ubicaciones
+  &__location {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    border: 3px solid var(--color-text-light);
+    border-radius: 10px;
+    padding: 1.2rem 2rem;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    backdrop-filter: blur(2px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+
+    // Centrar el botón en su posición
+    transform: translate(-50%, -50%);
+
+    &:hover {
+      background: var(--color-text-light);
+      transform: translate(-50%, -50%) scale(1.08);
+      box-shadow: 0 6px 20px rgba(255, 255, 255, 0.4);
+
+      .map__location-text {
+        color: var(--color-bg-main);
+      }
+    }
+
+    &:active {
+      transform: translate(-50%, -50%) scale(1.02);
+    }
+
+    &--casa {
+      top: 9%;
+      left: 50%;
+      width: 10rem;
+    }
+
+    &--bosque {
+      top: 20%;
+      left: 50%;
+      width: 20rem;
+    }
+
+    &--academia {
+      top: 36%;
+      left: 50%;
+      width: 22rem;
+    }
+
+    &--dungeon {
+      top: 47%;
+      left: 50%;
+      width: 22rem;
+    }
+
+    &--castillo {
+      top: 64%;
+      left: 50%;
+      width: 26rem;
+    }
+
+    &--jardin {
+      top: 77%;
+      left: 50%;
+      width: 22rem;
+    }
+
+    &--taberna {
+      top: 96%;
+      left: 50%;
+      width: 18rem;
+    }
+  }
+
+  &__location-text {
+    font-family: var(--font-main);
+    font-size: 1.8rem;
+    letter-spacing: 0.12rem;
+    color: var(--color-text-light);
+    text-align: center;
+    transition: color 0.25s ease;
+    line-height: 1.3;
+  }
+}

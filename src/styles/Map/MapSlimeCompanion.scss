@@ -1,0 +1,80 @@
+// ==========================
+//   SLIME COMPANION - MAP
+// ==========================
+.map-slime {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 100;
+  pointer-events: none;
+
+  .slime__container {
+    pointer-events: auto;
+    margin-left: 2rem;
+    margin-bottom: 2rem;
+  }
+  .slime__speech-bubble {
+    bottom: calc(100% + 1rem);
+    left: 0;
+    top: auto;
+    transform: none;
+    max-width: calc(100vw - 4rem);
+  }
+}
+
+/* RESPONSIVE - TABLET */
+@media (min-width: 768px) {
+  .map-slime {
+    .slime__container {
+      margin-left: 4rem;
+      margin-bottom: 4rem;
+      flex-direction: row;
+      align-items: center;
+    }
+
+    .slime__speech-bubble {
+      left: calc(100% + 2rem);
+      top: 50%;
+      bottom: auto;
+      transform: translateY(-50%);
+      max-width: 40rem;
+
+      &::after {
+        left: -1.4rem;
+        top: 50%;
+        bottom: auto;
+        transform: translateY(-50%);
+        border-width: 1rem 1.4rem 1rem 0;
+        border-color: transparent var(--color-text) transparent transparent;
+      }
+
+      &::before {
+        left: -1.1rem;
+        top: 50%;
+        bottom: auto;
+        transform: translateY(-50%);
+        border-width: 0.9rem 1.2rem 0.9rem 0;
+        border-color: transparent rgba(255, 255, 255, 0.95) transparent
+          transparent;
+      }
+    }
+  }
+}
+
+/* RESPONSIVE - DESKTOP */
+@media (min-width: 1024px) {
+  .map-slime {
+    .slime__speech-bubble {
+      max-width: 48rem;
+    }
+  }
+}
+
+/* RESPONSIVE - LARGE DESKTOP */
+@media (min-width: 1440px) {
+  .map-slime {
+    .slime__speech-bubble {
+      max-width: 56rem;
+    }
+  }
+}
