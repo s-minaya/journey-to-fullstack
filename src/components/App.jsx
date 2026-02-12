@@ -6,6 +6,7 @@ import Skills from "./Pages/Skills";
 import Projects from "./Pages/Projects";
 import Contact from "./Pages/Contact";
 import { useEffect, useState } from "react";
+import MapPage from "./Map/MapPage";
 
 const LANDING_SLIME_TEXTS = [
   "¡Hola, aventurero! Soy tu compañero slime.",
@@ -47,6 +48,7 @@ function App() {
         <Route path="/my-skills" element={<Skills />} />
         <Route path="/projects" element={<Projects />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/map-page" element={<MapPage/>} />
       </Routes>
     </div>
   );
