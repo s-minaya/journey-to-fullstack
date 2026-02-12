@@ -1,24 +1,42 @@
 import { useEffect, useState, useRef } from "react";
 import BlueSlime from "../../images/blue-slime.gif";
-import "../../styles/Slime/SlimeCompanion.scss"
+import "../../styles/Slime/SlimeCompanion.scss";
 
 const TYPING_SPEED = 45;
 
-function SlimeCompanion({ texts, visible }) {
+function SlimeCompanion({ texts = [], visible }) {
   const [isTyping, setIsTyping] = useState(false);
   const [currentTextIndex, setCurrentTextIndex] = useState(0);
   const [displayedText, setDisplayedText] = useState("");
   const [showBubble, setShowBubble] = useState(false);
   const intervalRef = useRef(null);
 
+  // =============================
+  // Reinicia la animación cada vez que los textos cambian
+  // =============================
+  useEffect(() => {
+    // Si no hay textos, no hacemos nada
+    if (!texts || texts.length === 0) return;
+
+    // Reiniciamos al primer texto
+    setCurrentTextIndex(0);
+    setIsTyping(true);
+  }, [texts]);
+
+  // =============================
+  // Efecto para "escribir" el texto
+  // =============================
   useEffect(() => {
     if (!isTyping) return;
+    if (!texts || texts.length === 0) return;
 
     clearInterval(intervalRef.current);
     setDisplayedText("");
     setShowBubble(true);
 
     const fullText = texts[currentTextIndex];
+    if (!fullText) return; 
+
     let charIndex = 0;
 
     intervalRef.current = setInterval(() => {
@@ -33,6 +51,9 @@ function SlimeCompanion({ texts, visible }) {
     return () => clearInterval(intervalRef.current);
   }, [isTyping, currentTextIndex, texts]);
 
+  // =============================
+  //      Click en el slime 
+  // =============================
   const handleSlimeClick = () => {
     clearInterval(intervalRef.current);
 

@@ -7,6 +7,13 @@ import Projects from "./Pages/Projects";
 import Contact from "./Pages/Contact";
 import { useEffect, useState } from "react";
 import MapPage from "./Map/MapPage";
+import MapAboutMe from "./Pages/MapAboutMe";
+import FirstProjects from "./Pages/FirstProjects";
+import TrainingProjects from "./Pages/TrainingProjects";
+import BackendProjects from "./Pages/BackendProjects";
+import FullStackProjects from "./Pages/FullStackProjects";
+import FavoriteProjects from "./Pages/FavoriteProjects";
+import MapContact from "./Pages/MapContact";
 
 const LANDING_SLIME_TEXTS = [
   "¡Hola, aventurero! Soy tu compañero slime.",
@@ -48,7 +55,14 @@ function App() {
         <Route path="/my-skills" element={<Skills />} />
         <Route path="/projects" element={<Projects />} />
         <Route path="/contact" element={<Contact />} />
-        <Route path="/map-page" element={<MapPage/>} />
+        <Route path="/map-page" element={<MapPage />} />
+        <Route path="/map-about-me" element={<MapAboutMe />} />
+        <Route path="/first-projects" element={<FirstProjects />} />
+        <Route path="/training-projects" element={<TrainingProjects />} />
+        <Route path="/backend-projects" element={<BackendProjects/>} />
+        <Route path="/fullstack-projects" element={<FullStackProjects/>} />
+        <Route path="/favorite-projects" element={<FavoriteProjects/>} />
+        <Route path="/map-contact" element={<MapContact/>} />
       </Routes>
     </div>
   );
