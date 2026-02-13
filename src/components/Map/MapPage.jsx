@@ -3,7 +3,9 @@ import { useNavigate } from "react-router";
 import SlimeLoader from "../Slime/SlimeLoader";
 import MapSlimeCompanion from "./MapSlimeCompanion";
 import ExperienceBar from "./ExperienceBar";
+import GardenSlimes from "./GardenSlimes";
 import MapBackgroundMobile from "../../images/map-background-mobile.png";
+import MapBackgroundDesktop from "../../images/map-background.png";
 import { usePageIntro } from "../hooks/usePageIntro";
 import { useMapProgress } from "../hooks/useMapProgress";
 import "../../styles/Map/MapPage.scss";
@@ -90,7 +92,13 @@ const COMPLETION_SLIME_TEXTS = [
 function MapPage() {
   const navigate = useNavigate();
   const { loading, backgroundVisible, contentVisible } = usePageIntro();
-  const { currentXP, maxXP, isMaxLevel, markLocationAsVisited, visitedLocations } = useMapProgress();
+  const {
+    currentXP,
+    maxXP,
+    isMaxLevel,
+    markLocationAsVisited,
+    visitedLocations,
+  } = useMapProgress();
 
   // ============================
   // Estado que guarda la ubicación seleccionada
@@ -131,68 +139,86 @@ function MapPage() {
   const slimeTexts = isMaxLevel
     ? COMPLETION_SLIME_TEXTS
     : selectedLocationId
-    ? [
-        `${LOCATIONS.find((loc) => loc.id === selectedLocationId).description} Toca de nuevo para entrar →`,
-      ]
-    : INITIAL_SLIME_TEXTS;
+      ? [
+          `${LOCATIONS.find((loc) => loc.id === selectedLocationId).description} Toca de nuevo para entrar →`,
+        ]
+      : INITIAL_SLIME_TEXTS;
 
   if (loading) return <SlimeLoader />;
 
   return (
     <section className={`map ${backgroundVisible ? "map--visible" : ""}`}>
       {/* Barra de experiencia */}
-      <ExperienceBar visible={contentVisible} currentXP={currentXP} maxXP={maxXP} />
+      <ExperienceBar
+        visible={contentVisible}
+        currentXP={currentXP}
+        maxXP={maxXP}
+      />
 
       {/* Contenedor del mapa */}
       <div className="map__container">
-        {/* Imagen de fondo */}
-        <img
-          src={MapBackgroundMobile}
-          alt="World map"
-          className="map__background"
-        />
+        <div className="map__wrapper">
+          {/* Imagen de fondo - mobile */}
+          <img
+            src={MapBackgroundMobile}
+            alt="World map"
+            className="map__background map__background--mobile"
+          />
 
-        {/* Ubicaciones del mapa */}
-        <div
-          className={`map__locations ${
-            contentVisible ? "map__locations--visible" : ""
-          }`}
-        >
-          {LOCATIONS.map((location) => (
-            <div
-              key={location.id}
-              className={`map__location ${location.className} ${
-                selectedLocationId === location.id ? "map__location--selected" : ""
-              } ${isLocationVisited(location.id) ? "map__location--visited" : ""}`}
-              onClick={() => handleLocationClick(location)}
-              role="button"
-              tabIndex={0}
-              aria-label={
-                isLocationVisited(location.id)
-                  ? `${location.name} - Ya visitada`
-                  : selectedLocationId === location.id
-                  ? `${location.name} - Selecciona de nuevo para entrar`
-                  : `${location.name} - Selecciona para ver información`
-              }
-              onKeyDown={(e) => {
-                if (e.key === "Enter" || e.key === " ") {
-                  handleLocationClick(location);
+          {/* Imagen de fondo - desktop */}
+          <img
+            src={MapBackgroundDesktop}
+            alt="World map"
+            className="map__background map__background--desktop"
+          />
+
+          {/* Ubicaciones del mapa */}
+          <div
+            className={`map__locations ${
+              contentVisible ? "map__locations--visible" : ""
+            }`}
+          >
+            {LOCATIONS.map((location) => (
+              <div
+                key={location.id}
+                className={`map__location ${location.className} ${
+                  selectedLocationId === location.id
+                    ? "map__location--selected"
+                    : ""
+                } ${isLocationVisited(location.id) ? "map__location--visited" : ""}`}
+                onClick={() => handleLocationClick(location)}
+                role="button"
+                tabIndex={0}
+                aria-label={
+                  isLocationVisited(location.id)
+                    ? `${location.name} - Ya visitada`
+                    : selectedLocationId === location.id
+                      ? `${location.name} - Selecciona de nuevo para entrar`
+                      : `${location.name} - Selecciona para ver información`
                 }
-              }}
-            >
-              <span className="map__location-text">{location.name}</span>
-              {/* Indicador de visitada */}
-              {isLocationVisited(location.id) && (
-                <span className="map__location-badge">✓</span>
-              )}
-            </div>
-          ))}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    handleLocationClick(location);
+                  }
+                }}
+              >
+                <span className="map__location-text">{location.name}</span>
+                {/* Indicador de visitada */}
+                {isLocationVisited(location.id) && (
+                  <span className="map__location-badge">✓</span>
+                )}
+              </div>
+            ))}
+          </div>
+
+          {/* Slimes del jardín - solo visible a partir de desktop */}
+          <GardenSlimes visible={contentVisible} />
         </div>
       </div>
 
       {/* Slime companion con textos dinámicos */}
-      <MapSlimeCompanion 
-        texts={slimeTexts} 
+      <MapSlimeCompanion
+        texts={slimeTexts}
         visible={contentVisible}
         showContactButton={isMaxLevel}
         onContactClick={handleGoToContact}
