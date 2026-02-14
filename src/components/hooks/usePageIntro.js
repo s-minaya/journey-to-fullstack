@@ -1,11 +1,24 @@
 import { useEffect, useState } from "react";
 
-export function usePageIntro({ loaderTime = 3000, contentDelay = 4500 } = {}) {
-  const [loading, setLoading] = useState(true);
-  const [backgroundVisible, setBackgroundVisible] = useState(false);
-  const [contentVisible, setContentVisible] = useState(false);
+export function usePageIntro({
+  loaderTime = 3000,
+  contentDelay = 4500,
+  skipLoader = false,
+} = {}) {
+  const [loading, setLoading] = useState(!skipLoader);
+  const [backgroundVisible, setBackgroundVisible] = useState(skipLoader);
+  const [contentVisible, setContentVisible] = useState(skipLoader);
 
   useEffect(() => {
+    if (skipLoader) {
+      // Si se salta el loader, todo es visible inmediatamente
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setLoading(false);
+      setBackgroundVisible(true);
+      setContentVisible(true);
+      return;
+    }
+
     const loaderTimer = setTimeout(() => {
       setLoading(false);
       setBackgroundVisible(true);
@@ -19,7 +32,7 @@ export function usePageIntro({ loaderTime = 3000, contentDelay = 4500 } = {}) {
       clearTimeout(loaderTimer);
       clearTimeout(contentTimer);
     };
-  }, [loaderTime, contentDelay]);
+  }, [loaderTime, contentDelay, skipLoader]);
 
   return {
     loading,

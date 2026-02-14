@@ -1,0 +1,437 @@
+// ==========================
+//    PROJECT CAROUSEL
+// ==========================
+
+@keyframes cardAppear {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+.project-carousel {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin-bottom: 5rem;
+
+  // Viewport del carousel
+  &__viewport {
+    flex: 1;
+    overflow: hidden;
+  }
+
+  &__track {
+    display: grid;
+    gap: 3rem;
+    width: 100%;
+  }
+
+  // ============================
+  //    CARDS DE PROYECTOS
+  // ============================
+  &__card {
+    position: relative;
+    background: rgba(31, 41, 55, 0.8);
+    border: 3px solid var(--color-text-light);
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(8px);
+    box-shadow: 
+      0 4px 15px rgba(0, 0, 0, 0.4),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    animation: cardAppear 0.6s ease both;
+
+    // Efecto de brillo en el borde
+    &::before {
+      content: "";
+      position: absolute;
+      inset: -3px;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(249, 250, 251, 0.4),
+        transparent
+      );
+      background-size: 200% 100%;
+      border-radius: 12px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: -1;
+      animation: shimmer 3s linear infinite;
+    }
+
+    &:hover {
+      transform: translateY(-8px) scale(1.02);
+      border-color: rgba(16, 185, 129, 0.8);
+      box-shadow: 
+        0 8px 25px rgba(16, 185, 129, 0.3),
+        0 0 30px rgba(16, 185, 129, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+
+      &::before {
+        opacity: 1;
+      }
+
+      .project-carousel__overlay {
+        opacity: 1;
+      }
+
+      .project-carousel__image {
+        transform: scale(1.05);
+        filter: brightness(1);
+      }
+    }
+
+    &:active {
+      transform: translateY(-4px) scale(1);
+    }
+
+    // Estado seleccionado 
+    &--selected {
+      border-color: #10b981;
+      background: rgba(16, 185, 129, 0.15);
+      box-shadow: 
+        0 8px 25px rgba(16, 185, 129, 0.4),
+        0 0 40px rgba(16, 185, 129, 0.3);
+
+      .project-carousel__title {
+        color: #10b981;
+      }
+    }
+  }
+
+  // Contenedor de imagen
+  &__image-container {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background: rgba(15, 23, 42, 0.5);
+  }
+
+  &__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    image-rendering: auto;
+    transition: transform 0.3s ease, filter 0.3s ease;
+    filter: brightness(0.9);
+  }
+
+  // Overlay al hacer hover
+  &__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      transparent 0%,
+      rgba(0, 0, 0, 0.7) 100%
+    );
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  &__cta {
+    font-family: var(--font-main);
+    font-size: 2rem;
+    letter-spacing: 0.15rem;
+    color: var(--color-text-light);
+    background: rgba(16, 185, 129, 0.9);
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    border: 2px solid var(--color-text-light);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  }
+
+  // Contenido de la card
+  &__content {
+    padding: 2rem;
+  }
+
+  &__title {
+    font-family: var(--font-title);
+    font-size: 2.4rem;
+    letter-spacing: 0.2rem;
+    color: var(--color-text-light);
+    margin-bottom: 1.2rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    transition: color 0.3s ease;
+  }
+
+  // Tags
+  &__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+  }
+
+  &__tag {
+    font-family: var(--font-main);
+    font-size: 1.4rem;
+    letter-spacing: 0.1rem;
+    color: rgba(249, 250, 251, 0.9);
+    background: rgba(55, 65, 81, 0.8);
+    border: 2px solid rgba(249, 250, 251, 0.3);
+    border-radius: 6px;
+    padding: 0.4rem 1rem;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background: rgba(16, 185, 129, 0.3);
+      border-color: #10b981;
+      transform: scale(1.05);
+    }
+  }
+
+  // ============================
+  //   BOTONES DE NAVEGACIÓN
+  // ============================
+  &__nav-button {
+    font-family: var(--font-title);
+    font-size: 4rem;
+    color: var(--color-text-light);
+    background: rgba(31, 41, 55, 0.8);
+    border: 3px solid var(--color-text-light);
+    border-radius: 50%;
+    width: 5rem;
+    height: 5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    flex-shrink: 0;
+
+    &:hover:not(&--disabled) {
+      background: var(--color-text-light);
+      color: var(--color-bg-main);
+      transform: scale(1.1);
+      box-shadow: 0 6px 20px rgba(255, 255, 255, 0.3);
+    }
+
+    &:active:not(&--disabled) {
+      transform: scale(1.05);
+    }
+
+    &--disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+  }
+
+  // ============================
+  //   INDICADORES DE PÁGINA
+  // ============================
+  &__indicators {
+    position: absolute;
+    bottom: -3.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 1rem;
+    z-index: 10;
+  }
+
+  &__indicator {
+    width: 1.2rem;
+    height: 1.2rem;
+    border-radius: 50%;
+    background: rgba(249, 250, 251, 0.3);
+    border: 2px solid var(--color-text-light);
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background: rgba(249, 250, 251, 0.5);
+      transform: scale(1.2);
+    }
+
+    &--active {
+      background: #10b981;
+      box-shadow: 0 0 10px rgba(16, 185, 129, 0.6);
+      transform: scale(1.3);
+    }
+  }
+}
+
+/* ============================
+   RESPONSIVE - TABLET
+   ============================ */
+@media (min-width: 768px) {
+  .project-carousel {
+    gap: 2.5rem;
+
+    &__track {
+      gap: 3.5rem;
+    }
+
+    &__nav-button {
+      font-size: 4.5rem;
+      width: 6rem;
+      height: 6rem;
+    }
+
+    &__card {
+      &__content {
+        padding: 2.4rem;
+      }
+
+      &__title {
+        font-size: 2.8rem;
+        margin-bottom: 1.4rem;
+      }
+
+      &__tags {
+        gap: 1rem;
+      }
+
+      &__tag {
+        font-size: 1.6rem;
+        padding: 0.5rem 1.2rem;
+      }
+
+      &__cta {
+        font-size: 2.2rem;
+        padding: 1.2rem 2.4rem;
+      }
+    }
+
+    &__indicators {
+      bottom: -4rem;
+      gap: 1.2rem;
+    }
+
+    &__indicator {
+      width: 1.4rem;
+      height: 1.4rem;
+    }
+  }
+}
+
+/* ============================
+   RESPONSIVE - DESKTOP
+   ============================ */
+@media (min-width: 1024px) {
+  .project-carousel {
+    gap: 3rem;
+
+    &__track {
+      gap: 4rem;
+    }
+
+    &__nav-button {
+      font-size: 5rem;
+      width: 7rem;
+      height: 7rem;
+    }
+
+    &__card {
+      &__content {
+        padding: 2.8rem;
+      }
+
+      &__title {
+        font-size: 3.2rem;
+        margin-bottom: 1.6rem;
+      }
+
+      &__tags {
+        gap: 1.2rem;
+      }
+
+      &__tag {
+        font-size: 1.8rem;
+        padding: 0.6rem 1.4rem;
+      }
+
+      &__cta {
+        font-size: 2.4rem;
+        padding: 1.4rem 2.8rem;
+      }
+    }
+
+    &__indicators {
+      bottom: -4.5rem;
+    }
+
+    &__indicator {
+      width: 1.6rem;
+      height: 1.6rem;
+    }
+  }
+}
+
+/* ============================
+   RESPONSIVE - LARGE DESKTOP
+   ============================ */
+@media (min-width: 1440px) {
+  .project-carousel {
+    gap: 3.5rem;
+
+    &__track {
+      gap: 5rem;
+    }
+
+    &__nav-button {
+      font-size: 5.5rem;
+      width: 8rem;
+      height: 8rem;
+    }
+
+    &__card {
+      &__content {
+        padding: 3.2rem;
+      }
+
+      &__title {
+        font-size: 3.6rem;
+        margin-bottom: 1.8rem;
+      }
+
+      &__tag {
+        font-size: 2rem;
+        padding: 0.7rem 1.6rem;
+      }
+
+      &__cta {
+        font-size: 2.6rem;
+        padding: 1.6rem 3.2rem;
+      }
+    }
+
+    &__indicators {
+      bottom: -5rem;
+      gap: 1.4rem;
+    }
+
+    &__indicator {
+      width: 1.8rem;
+      height: 1.8rem;
+    }
+  }
+}
