@@ -38,8 +38,11 @@
 
   &__track {
     display: grid;
+    grid-template-columns: 1fr;
     gap: 3rem;
     width: 100%;
+    max-width: 50rem;
+    margin: 0 auto;
   }
 
   // ============================
@@ -58,6 +61,7 @@
       0 4px 15px rgba(0, 0, 0, 0.4),
       inset 0 1px 0 rgba(255, 255, 255, 0.1);
     animation: cardAppear 0.6s ease both;
+    width: 100%;
 
     // Efecto de brillo en el borde
     &::before {
@@ -104,7 +108,7 @@
       transform: translateY(-4px) scale(1);
     }
 
-    // Estado seleccionado 
+    // Estado seleccionado
     &--selected {
       border-color: #10b981;
       background: rgba(16, 185, 129, 0.15);
@@ -288,6 +292,8 @@
 
     &__track {
       gap: 3.5rem;
+      grid-template-columns: 1fr; 
+      max-width: 55rem;
     }
 
     &__nav-button {
@@ -296,29 +302,27 @@
       height: 6rem;
     }
 
-    &__card {
-      &__content {
-        padding: 2.4rem;
-      }
+    &__content {
+      padding: 2.4rem;
+    }
 
-      &__title {
-        font-size: 2.8rem;
-        margin-bottom: 1.4rem;
-      }
+    &__title {
+      font-size: 2.8rem;
+      margin-bottom: 1.4rem;
+    }
 
-      &__tags {
-        gap: 1rem;
-      }
+    &__tags {
+      gap: 1rem;
+    }
 
-      &__tag {
-        font-size: 1.6rem;
-        padding: 0.5rem 1.2rem;
-      }
+    &__tag {
+      font-size: 1.6rem;
+      padding: 0.5rem 1.2rem;
+    }
 
-      &__cta {
-        font-size: 2.2rem;
-        padding: 1.2rem 2.4rem;
-      }
+    &__cta {
+      font-size: 2.2rem;
+      padding: 1.2rem 2.4rem;
     }
 
     &__indicators {
@@ -342,6 +346,8 @@
 
     &__track {
       gap: 4rem;
+      grid-template-columns: repeat(2, 1fr); 
+      max-width: 110rem;
     }
 
     &__nav-button {
@@ -350,29 +356,27 @@
       height: 7rem;
     }
 
-    &__card {
-      &__content {
-        padding: 2.8rem;
-      }
+    &__content {
+      padding: 2.8rem;
+    }
 
-      &__title {
-        font-size: 3.2rem;
-        margin-bottom: 1.6rem;
-      }
+    &__title {
+      font-size: 3.2rem;
+      margin-bottom: 1.6rem;
+    }
 
-      &__tags {
-        gap: 1.2rem;
-      }
+    &__tags {
+      gap: 1.2rem;
+    }
 
-      &__tag {
-        font-size: 1.8rem;
-        padding: 0.6rem 1.4rem;
-      }
+    &__tag {
+      font-size: 1.8rem;
+      padding: 0.6rem 1.4rem;
+    }
 
-      &__cta {
-        font-size: 2.4rem;
-        padding: 1.4rem 2.8rem;
-      }
+    &__cta {
+      font-size: 2.4rem;
+      padding: 1.4rem 2.8rem;
     }
 
     &__indicators {
@@ -391,10 +395,12 @@
    ============================ */
 @media (min-width: 1440px) {
   .project-carousel {
-    gap: 3.5rem;
+    gap: 4rem;
 
     &__track {
       gap: 5rem;
+      grid-template-columns: repeat(2, 1fr); 
+      max-width: 120rem;
     }
 
     &__nav-button {
@@ -403,25 +409,23 @@
       height: 8rem;
     }
 
-    &__card {
-      &__content {
-        padding: 3.2rem;
-      }
+    &__content {
+      padding: 3.2rem;
+    }
 
-      &__title {
-        font-size: 3.6rem;
-        margin-bottom: 1.8rem;
-      }
+    &__title {
+      font-size: 3.6rem;
+      margin-bottom: 1.8rem;
+    }
 
-      &__tag {
-        font-size: 2rem;
-        padding: 0.7rem 1.6rem;
-      }
+    &__tag {
+      font-size: 2rem;
+      padding: 0.7rem 1.6rem;
+    }
 
-      &__cta {
-        font-size: 2.6rem;
-        padding: 1.6rem 3.2rem;
-      }
+    &__cta {
+      font-size: 2.6rem;
+      padding: 1.6rem 3.2rem;
     }
 
     &__indicators {

@@ -7,9 +7,8 @@ function ProjectCarousel({ projects, onProjectSelect, selectedProjectId }) {
 
   // Calcular cuántos proyectos mostrar según el tamaño de pantalla
   const getProjectsPerPage = () => {
-    if (window.innerWidth >= 1440) return 3;
-    if (window.innerWidth >= 1024) return 2;
-    return 1;
+    if (window.innerWidth >= 1024) return 2; // Desktop: 2 tarjetas
+    return 1; // Móvil/Tablet: 1 tarjeta
   };
 
   const [projectsPerPage, setProjectsPerPage] = useState(getProjectsPerPage());
@@ -55,14 +54,8 @@ function ProjectCarousel({ projects, onProjectSelect, selectedProjectId }) {
         ‹
       </button>
 
-      {/* Grid de proyectos visibles */}
       <div className="project-carousel__viewport">
-        <div
-          className="project-carousel__track"
-          style={{
-            gridTemplateColumns: `repeat(${visibleProjects.length}, 1fr)`,
-          }}
-        >
+        <div className="project-carousel__track">
           {visibleProjects.map((project, index) => (
             <article
               key={project.id}
