@@ -92,7 +92,7 @@ const LOCATIONS = [
 // ============================
 const INITIAL_SLIME_TEXTS = [
   "Este es el mapa del mundo ◕‿◕",
-  "¡Haz scroll para explorar las ubicaciones!",
+  "¡Selecciona una ubicación para saber más!",
 ];
 
 // ============================

@@ -1,0 +1,207 @@
+// ==========================
+//      BACKEND PROJECTS
+//      (Backend Dungeon)
+// ==========================
+.backend-projects {
+  width: 100%;
+  min-height: 100dvh;
+  position: relative;
+  overflow-x: hidden;
+  padding: 8rem 2rem 25rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  // Imagen de fondo del dungeon
+  &::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image: url("../../images/backend-dungegon.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  // Overlay oscuro más intenso para ambiente de dungeon
+  &::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: rgba(10, 10, 20, 0.6);
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  // Botón de volver
+  &__back-button {
+    position: fixed;
+    top: 2rem;
+    left: 2rem;
+    z-index: 200;
+    font-family: var(--font-main);
+    font-size: 1.6rem;
+    letter-spacing: 0.12rem;
+    color: var(--color-text-light);
+    background: rgba(31, 41, 55, 0.9);
+    border: 2px solid var(--color-text-light);
+    border-radius: 8px;
+    padding: 0.8rem 1.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+
+    &:hover {
+      background: var(--color-text-light);
+      color: var(--color-bg-main);
+      transform: translateX(-5px) scale(1.05);
+      box-shadow: 0 6px 20px rgba(255, 255, 255, 0.3);
+    }
+
+    &:active {
+      transform: translateX(-3px) scale(1);
+    }
+  }
+
+  // Header
+  &__header {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    margin-bottom: 6rem;
+    width: 100%;
+  }
+
+  &__title {
+    font-family: var(--font-title);
+    font-size: 4rem;
+    letter-spacing: 0.3rem;
+    color: var(--color-text-light);
+    margin-bottom: 1rem;
+    text-shadow: 
+      0 0 20px rgba(138, 43, 226, 0.6),
+      0 0 40px rgba(138, 43, 226, 0.4),
+      3px 3px 0 rgba(0, 0, 0, 0.7);
+  }
+
+  &__subtitle {
+    font-family: var(--font-main);
+    font-size: 2rem;
+    letter-spacing: 0.15rem;
+    color: rgba(249, 250, 251, 0.9);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+  }
+
+  // Wrapper del carousel
+  &__carousel-wrapper {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 90rem;
+    margin: 0 auto 8rem;
+  }
+}
+
+/* ============================
+   RESPONSIVE - TABLET
+   ============================ */
+@media (min-width: 768px) {
+  .backend-projects {
+    padding: 10rem 4rem 28rem;
+
+    &__back-button {
+      top: 2.5rem;
+      left: 2.5rem;
+      font-size: 1.8rem;
+      padding: 1rem 2rem;
+    }
+
+    &__header {
+      margin-bottom: 7rem;
+    }
+
+    &__title {
+      font-size: 5.5rem;
+      letter-spacing: 0.4rem;
+    }
+
+    &__subtitle {
+      font-size: 2.4rem;
+    }
+
+    &__carousel-wrapper {
+      max-width: 110rem;
+    }
+  }
+}
+
+/* ============================
+   RESPONSIVE - DESKTOP
+   ============================ */
+@media (min-width: 1024px) {
+  .backend-projects {
+    padding: 12rem 6rem 30rem;
+
+    &__back-button {
+      top: 3rem;
+      left: 3rem;
+      font-size: 2rem;
+      padding: 1.2rem 2.4rem;
+      border-width: 3px;
+    }
+
+    &__header {
+      margin-bottom: 8rem;
+    }
+
+    &__title {
+      font-size: 6.5rem;
+      letter-spacing: 0.5rem;
+    }
+
+    &__subtitle {
+      font-size: 2.8rem;
+    }
+
+    &__carousel-wrapper {
+      max-width: 130rem; 
+      margin-bottom: 10rem;
+    }
+  }
+}
+
+/* ============================
+   RESPONSIVE - LARGE DESKTOP
+   ============================ */
+@media (min-width: 1440px) {
+  .backend-projects {
+    padding: 14rem 8rem 32rem;
+
+    &__back-button {
+      top: 3.5rem;
+      left: 3.5rem;
+      font-size: 2.2rem;
+      padding: 1.4rem 2.8rem;
+    }
+
+    &__header {
+      margin-bottom: 9rem;
+    }
+
+    &__title {
+      font-size: 7.5rem;
+      letter-spacing: 0.6rem;
+    }
+
+    &__subtitle {
+      font-size: 3.2rem;
+    }
+
+    &__carousel-wrapper {
+      max-width: 150rem;
+    }
+  }
+}
