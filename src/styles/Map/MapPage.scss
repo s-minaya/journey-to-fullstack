@@ -6,39 +6,36 @@
   height: 100dvh;
   background-color: var(--color-bg-main);
   position: relative;
-  overflow: hidden;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
 
-  // Contenedor principal del mapa
+  // MÓVIL: Scroll vertical fluido
+  overflow-y: auto;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+
   &__container {
     position: relative;
     width: 100%;
     height: 100%;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;
   }
 
-  // Wrapper para la imagen y las ubicaciones
   &__wrapper {
     position: relative;
     width: 100%;
-    height: 100%;
+    height: auto;
+    flex: 1;
   }
 
-  // Imagen de fondo del mapa
   &__background {
-    width: 100%;
-    height: auto;
-    display: block;
-    opacity: 0;
-    animation: fadeInBackground 1.5s ease 0.5s forwards;
-
-    // Mobile y Tablet: mostrar versión vertical
+    display: none;
+    
     &--mobile {
-      display: block;
+      display: none;
     }
 
     &--desktop {
@@ -46,7 +43,42 @@
     }
   }
 
-  // Contenedor de las ubicaciones
+  // ============================
+  // GRID DE IMÁGENES (MÓVIL)
+  // ============================
+  &__images-grid {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    opacity: 0;
+    transition: opacity 0.8s ease 1s;
+    
+    &--visible {
+      opacity: 1;
+    }
+  }
+
+  &__image-container {
+    width: 100%;
+    height: 100vh; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  &__section-image {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover; 
+    object-position: center;
+  }
+
+  // ============================
+  // UBICACIONES (Botones flotantes)
+  // ============================
   &__locations {
     position: absolute;
     top: 0;
@@ -54,19 +86,14 @@
     width: 100%;
     height: 100%;
     opacity: 0;
-    transform: scale(0.95);
-    transition:
-      opacity 0.8s ease 1s,
-      transform 0.8s ease 1s;
+    transition: opacity 0.8s ease 1.2s;
     pointer-events: none;
-
+    
     &--visible {
       opacity: 1;
-      transform: scale(1);
     }
   }
 
-  // Estilos base para todas las ubicaciones
   &__location {
     position: absolute;
     display: flex;
@@ -75,23 +102,23 @@
     text-decoration: none;
     border: 3px solid var(--color-text-light);
     border-radius: 10px;
-    padding: 0.5rem 1rem;
-    background: transparent;
+    padding: 1.2rem 2rem;
+    background: rgba(31, 41, 55, 0.85);
     cursor: pointer;
     transition: all 0.25s ease;
-    backdrop-filter: blur(2px);
+    backdrop-filter: blur(8px);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    z-index: 10;
+    width: 85%;
+    max-width: 35rem;
+    left: 50%;
+    transform: translateX(-50%);
     pointer-events: auto;
-    z-index: 100;
-
-    // Centrar el botón en su posición
-    transform: translate(-50%, -50%);
 
     &:hover {
       background: var(--color-text-light);
-      transform: translate(-50%, -50%) scale(1.08);
+      transform: translateX(-50%) scale(1.08);
       box-shadow: 0 6px 20px rgba(255, 255, 255, 0.4);
-      z-index: 120;
 
       .map__location-text {
         color: var(--color-bg-main);
@@ -99,12 +126,11 @@
     }
 
     &:active {
-      transform: translate(-50%, -50%) scale(1.02);
-      z-index: 120;
+      transform: translateX(-50%) scale(1.02);
     }
 
     &--visited {
-      background: rgba(16, 185, 129, 0.2);
+      background: rgba(16, 185, 129, 0.3);
       border-color: #10b981;
       box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
 
@@ -113,7 +139,7 @@
       }
 
       &:hover {
-        background: rgba(16, 185, 129, 0.3);
+        background: rgba(16, 185, 129, 0.4);
         border-color: #10b981;
         box-shadow: 0 6px 20px rgba(16, 185, 129, 0.5);
 
@@ -124,75 +150,61 @@
     }
 
     // ============================
-    // POSICIONES MÓVIL Y TABLET (vertical)
+    // POSICIONES MANUALES 
     // ============================
     &--casa {
-      top: 10%;
-      left: 50%;
-      width: 15rem;
+      top: 65vh; 
     }
 
     &--bosque {
-      top: 20%;
-      left: 50%;
-      width: 18rem;
+      top: 135vh; 
     }
 
     &--academia {
-      top: 36%;
-      left: 50%;
-      width: 20rem;
+      top: 240vh; 
     }
 
     &--dungeon {
-      top: 47%;
-      left: 50%;
-      width: 20rem;
+      top: 325vh; 
     }
 
     &--castillo {
-      top: 64%;
-      left: 50%;
-      width: 22rem;
+      top: 450vh; 
     }
 
     &--jardin {
-      top: 77%;
-      left: 50%;
-      width: 20rem;
+      top: 513vh; 
     }
 
     &--taberna {
-      top: 96%;
-      left: 50%;
-      width: 20rem;
+      top: 665vh; 
     }
   }
 
   &__location-text {
     font-family: var(--font-main);
-    font-size: 1.5rem;
-    letter-spacing: 0.12rem;
+    font-size: 2rem;
+    letter-spacing: 0.15rem;
     color: var(--color-text-light);
     text-align: center;
     transition: color 0.25s ease;
     line-height: 1.3;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
   }
 
-  // Badge de completado (checkmark)
   &__location-badge {
     position: absolute;
-    top: -0.8rem;
-    right: -0.8rem;
-    width: 2.4rem;
-    height: 2.4rem;
+    top: -1rem;
+    right: -1rem;
+    width: 3rem;
+    height: 3rem;
     background: #10b981;
     border: 2px solid var(--color-bg-main);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.4rem;
+    font-size: 1.8rem;
     color: white;
     font-weight: bold;
     box-shadow: 0 2px 8px rgba(16, 185, 129, 0.5);
@@ -200,7 +212,6 @@
   }
 }
 
-// Animación para el badge
 @keyframes badgePop {
   0% {
     transform: scale(0);
@@ -221,61 +232,39 @@
 @media (min-width: 768px) {
   .map {
     &__location {
-      padding: 1.4rem 2.4rem;
+      padding: 1.8rem 3rem;
       border-width: 4px;
-
-      &--casa {
-        width: 22rem;
-      }
-
-      &--bosque {
-        width: 22rem;
-      }
-
-      &--academia {
-        width: 22rem;
-      }
-
-      &--dungeon {
-        width: 22rem;
-      }
-
-      &--castillo {
-        width: 25rem;
-      }
-
-      &--jardin {
-        width: 25rem;
-      }
-
-      &--taberna {
-        width: 22rem;
-      }
+      max-width: 42rem;
     }
 
     &__location-text {
-      font-size: 2rem;
-      letter-spacing: 0.15rem;
+      font-size: 2.6rem;
+      letter-spacing: 0.18rem;
     }
 
     &__location-badge {
-      width: 2.8rem;
-      height: 2.8rem;
-      font-size: 1.6rem;
+      width: 3.5rem;
+      height: 3.5rem;
+      font-size: 2rem;
+      top: -1.2rem;
+      right: -1.2rem;
     }
   }
 }
 
 /* ============================
    RESPONSIVE - DESKTOP (1024px+)
-   Cambiamos al mapa horizontal
    ============================ */
 @media (min-width: 1024px) {
   .map {
     height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    overflow: hidden;
+
+    &__container {
+      width: 100%;
+      height: 100%;
+      flex-direction: row;
+    }
 
     &__wrapper {
       width: auto;
@@ -284,8 +273,16 @@
       position: relative;
     }
 
+    // Ocultar grid de imágenes en desktop
+    &__images-grid {
+      display: none;
+    }
+
     &__background {
-      // Desktop: mostrar versión horizontal
+      display: block;
+      opacity: 0;
+      animation: fadeInBackground 1.5s ease 0.5s forwards;
+      
       &--mobile {
         display: none;
       }
@@ -299,13 +296,44 @@
       }
     }
 
+    &__locations {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+      transform: scale(0.95);
+      pointer-events: none;
+      transition:
+        opacity 0.8s ease 1s,
+        transform 0.8s ease 1s;
+
+      &--visible {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
     &__location {
+      position: absolute;
       padding: 1.6rem 2.8rem;
+      pointer-events: auto;
+      width: auto;
+      max-width: none;
+      left: auto;
+      transform: translate(-50%, -50%);
+      background: transparent;
 
-      // ============================
-      //      POSICIONES DESKTOP
-      // ============================
+      &:hover {
+        transform: translate(-50%, -50%) scale(1.08);
+      }
 
+      &:active {
+        transform: translate(-50%, -50%) scale(1.02);
+      }
+
+      // Posiciones desktop
       &--bosque {
         top: 40%;
         left: 20%;
@@ -378,6 +406,7 @@
       height: 100%;
       object-fit: fill;
     }
+    
     &__location {
       padding: 1.8rem 3.2rem;
 
@@ -426,7 +455,6 @@
 /* ============================
    RESPONSIVE - EXTRA LARGE DESKTOP
    ============================ */
-
 @media (min-width: 1500px) {
   .map {
     justify-content: center;
@@ -441,5 +469,14 @@
       height: 100%;
       object-fit: initial;
     }
+  }
+}
+
+@keyframes fadeInBackground {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }
