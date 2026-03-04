@@ -1,10 +1,4 @@
-import { useState } from "react";
-import { useNavigate } from "react-router";
-import MapSlimeCompanion from "../Map/MapSlimeCompanion";
-import ProjectCarousel from "../Projects/ProjectCarousel";
-import ExperienceBar from "../Map/ExperienceBar";
-import { useMapProgress } from "../hooks/useMapProgress";
-import "../../styles/Pages/TrainingProjects.scss";
+import ProjectPage from "./ProjectPage";
 
 // ============================
 // Datos de los proyectos
@@ -103,70 +97,14 @@ const INITIAL_SLIME_TEXTS = [
 ];
 
 function TrainingProjects() {
-  const navigate = useNavigate();
-  const { currentXP, maxXP } = useMapProgress();
-  const [selectedProjectId, setSelectedProjectId] = useState(null);
-
-  // ============================
-  // Maneja la selección de proyectos
-  // ============================
-  const handleProjectSelect = (project) => {
-    if (selectedProjectId !== project.id) {
-      // Primer click: mostrar descripción
-      setSelectedProjectId(project.id);
-    } else {
-      // Segundo click: abrir proyecto en nueva pestaña
-      window.open(project.url, "_blank", "noopener,noreferrer");
-    }
-  };
-
-  // ============================
-  // Maneja el botón de volver
-  // ============================
-  const handleGoBack = () => {
-    navigate("/map-page");
-  };
-
-  // ============================
-  // Textos dinámicos para el slime
-  // ============================
-  const slimeTexts = selectedProjectId
-    ? [
-        `${TRAINING_PROJECTS.find((p) => p.id === selectedProjectId).description}`,
-        "Haz click de nuevo para ver el proyecto →",
-      ]
-    : INITIAL_SLIME_TEXTS;
-
   return (
-    <section className="training-projects">
-      {/* Barra de experiencia */}
-      <ExperienceBar visible={true} currentXP={currentXP} maxXP={maxXP} />
-
-      {/* Botón de volver al mapa */}
-      <button className="training-projects__back-button" onClick={handleGoBack}>
-        ← VOLVER AL MAPA
-      </button>
-
-      {/* Header */}
-      <header className="training-projects__header">
-        <h1 className="training-projects__title">ACADEMIA DE MAGIA</h1>
-        <p className="training-projects__subtitle">
-          Mi viaje de aprendizaje en programación ❀◕ ‿ ◕❀
-        </p>
-      </header>
-
-      {/* Carousel de proyectos */}
-      <div className="training-projects__carousel-wrapper">
-        <ProjectCarousel
-          projects={TRAINING_PROJECTS}
-          selectedProjectId={selectedProjectId}
-          onProjectSelect={handleProjectSelect}
-        />
-      </div>
-
-      {/* Slime companion */}
-      <MapSlimeCompanion texts={slimeTexts} visible={true} />
-    </section>
+    <ProjectPage
+      projects={TRAINING_PROJECTS}
+      pageVariant="training"
+      title="ACADEMIA DE MAGIA"
+      subtitle="Mi viaje de aprendizaje en programación ❀◕ ‿ ◕❀"
+      initialSlimeTexts={INITIAL_SLIME_TEXTS}
+    />
   );
 }
 

@@ -1,8 +1,7 @@
 // ==========================
-//    FULLSTACK PROJECTS
-//    (Castillo del Jefe Final)
+//      PROJECT PAGE
 // ==========================
-.fullstack-projects {
+.project-page {
   width: 100%;
   min-height: 100dvh;
   position: relative;
@@ -12,12 +11,11 @@
   flex-direction: column;
   align-items: center;
 
-  // Imagen de fondo del castillo
+  // Imagen de fondo (sobreescrita por cada variante)
   &::before {
     content: "";
     position: fixed;
     inset: 0;
-    background-image: url("../../images/final-boss-background.png");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -25,16 +23,11 @@
     pointer-events: none;
   }
 
-  // Overlay con tono rojizo épico
+  // Overlay de color (sobreescrito por cada variante)
   &::after {
     content: "";
     position: fixed;
     inset: 0;
-    background: linear-gradient(
-      180deg,
-      rgba(139, 0, 0, 0.3) 0%,
-      rgba(0, 0, 0, 0.5) 100%
-    );
     z-index: 0;
     pointer-events: none;
   }
@@ -85,11 +78,6 @@
     letter-spacing: 0.3rem;
     color: var(--color-text-light);
     margin-bottom: 1rem;
-    text-shadow: 
-      0 0 20px rgba(220, 20, 60, 0.8),
-      0 0 40px rgba(220, 20, 60, 0.5),
-      0 0 60px rgba(220, 20, 60, 0.3),
-      3px 3px 0 rgba(0, 0, 0, 0.7);
   }
 
   &__subtitle {
@@ -108,16 +96,103 @@
     max-width: 90rem;
     margin: 0 auto 8rem;
   }
-}
 
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
+  // ==========================
+  // VARIANTES DE TEMA
+  // ==========================
+
+  // Training Projects - Academia de Magia (azul)
+  &--training {
+    &::before {
+      background-image: url("../../images/training-projects-background.png");
+    }
+    &::after {
+      background: linear-gradient(
+        180deg,
+        rgba(30, 58, 138, 0.3) 0%,
+        rgba(0, 0, 0, 0.5) 100%
+      );
+    }
+    .project-page__title {
+      text-shadow:
+        0 0 20px rgba(59, 130, 246, 0.8),
+        0 0 40px rgba(59, 130, 246, 0.5),
+        0 0 60px rgba(59, 130, 246, 0.3),
+        3px 3px 0 rgba(0, 0, 0, 0.7);
+    }
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+
+  // Backend Projects - Backend Dungeon (morado/oscuro)
+  &--backend {
+    &::before {
+      background-image: url("../../images/backend-dungegon.png");
+    }
+    &::after {
+      background: rgba(10, 10, 20, 0.6);
+    }
+    .project-page__title {
+      text-shadow:
+        0 0 20px rgba(138, 43, 226, 0.6),
+        0 0 40px rgba(138, 43, 226, 0.4),
+        3px 3px 0 rgba(0, 0, 0, 0.7);
+    }
+  }
+
+  // First Projects - Bosque del Caos (verde)
+  &--first {
+    &::before {
+      background-image: url("../../images/fantasy-forest.png");
+    }
+    &::after {
+      background: rgba(15, 23, 42, 0.4);
+    }
+    .project-page__title {
+      text-shadow:
+        0 0 20px rgba(34, 139, 34, 0.6),
+        0 0 40px rgba(34, 139, 34, 0.4),
+        3px 3px 0 rgba(0, 0, 0, 0.5);
+    }
+  }
+
+  // Favorite Projects - Jardín de Criaturas (rosa)
+  &--favorite {
+    &::before {
+      background-image: url("../../images/favoriteprojects-background.png");
+    }
+    &::after {
+      background: rgba(255, 182, 193, 0.15);
+    }
+    .project-page__title {
+      text-shadow:
+        0 0 20px rgba(255, 105, 180, 0.8),
+        0 0 40px rgba(255, 182, 193, 0.6),
+        3px 3px 0 rgba(74, 25, 66, 0.5);
+    }
+    .project-page__subtitle {
+      color: rgba(255, 240, 245, 0.95);
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+  }
+
+  // Fullstack Projects - Castillo del Jefe Final (rojo)
+  &--fullstack {
+    &::before {
+      background-image: url("../../images/final-boss-background.png");
+    }
+    &::after {
+      background: linear-gradient(
+        180deg,
+        rgba(139, 0, 0, 0.3) 0%,
+        rgba(0, 0, 0, 0.5) 100%
+      );
+    }
+    .project-page__title {
+      text-shadow:
+        0 0 20px rgba(220, 20, 60, 0.8),
+        0 0 40px rgba(220, 20, 60, 0.5),
+        0 0 60px rgba(220, 20, 60, 0.3),
+        3px 3px 0 rgba(0, 0, 0, 0.7);
+    }
   }
 }
 
@@ -125,7 +200,7 @@
    RESPONSIVE - TABLET
    ============================ */
 @media (min-width: 768px) {
-  .fullstack-projects {
+  .project-page {
     padding: 10rem 4rem 28rem;
 
     &__back-button {
@@ -158,7 +233,7 @@
    RESPONSIVE - DESKTOP
    ============================ */
 @media (min-width: 1024px) {
-  .fullstack-projects {
+  .project-page {
     padding: 12rem 6rem 30rem;
 
     &__back-button {
@@ -183,7 +258,7 @@
     }
 
     &__carousel-wrapper {
-      max-width: 130rem; 
+      max-width: 130rem;
       margin-bottom: 10rem;
     }
   }
@@ -193,7 +268,7 @@
    RESPONSIVE - LARGE DESKTOP
    ============================ */
 @media (min-width: 1440px) {
-  .fullstack-projects {
+  .project-page {
     padding: 14rem 8rem 32rem;
 
     &__back-button {

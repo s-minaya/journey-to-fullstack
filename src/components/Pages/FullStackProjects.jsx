@@ -1,10 +1,4 @@
-import { useState } from "react";
-import { useNavigate } from "react-router";
-import MapSlimeCompanion from "../Map/MapSlimeCompanion";
-import ProjectCarousel from "../Projects/ProjectCarousel";
-import ExperienceBar from "../Map/ExperienceBar";
-import { useMapProgress } from "../hooks/useMapProgress";
-import "../../styles/Pages/FullStackProjects.scss";
+import ProjectPage from "./ProjectPage";
 
 // ============================
 // Datos de los proyectos
@@ -40,73 +34,15 @@ const INITIAL_SLIME_TEXTS = [
 ];
 
 function FullStackProjects() {
-  const navigate = useNavigate();
-  const { currentXP, maxXP } = useMapProgress();
-  const [selectedProjectId, setSelectedProjectId] = useState(null);
-
-  // ============================
-  // Maneja la selección de proyectos
-  // ============================
-  const handleProjectSelect = (project) => {
-    if (selectedProjectId !== project.id) {
-      // Primer click: mostrar descripción
-      setSelectedProjectId(project.id);
-    } else {
-      // Segundo click: abrir proyecto en nueva pestaña (demo)
-      window.open(project.url, "_blank", "noopener,noreferrer");
-    }
-  };
-
-  // ============================
-  // Maneja el botón de volver
-  // ============================
-  const handleGoBack = () => {
-    navigate("/map-page");
-  };
-
-  // ============================
-  // Textos dinámicos para el slime
-  // ============================
-  const getSlimeTexts = () => {
-    if (!selectedProjectId) return INITIAL_SLIME_TEXTS;
-    
-    const project = FULLSTACK_PROJECTS.find((p) => p.id === selectedProjectId);
-    return [
-      `${project.description}`,
-      "Haz click de nuevo para abrir →",
-    ];
-  };
-
   return (
-    <section className="fullstack-projects">
-      {/* Barra de experiencia */}
-      <ExperienceBar visible={true} currentXP={currentXP} maxXP={maxXP} />
-
-      {/* Botón de volver al mapa */}
-      <button className="fullstack-projects__back-button" onClick={handleGoBack}>
-        ← VOLVER AL MAPA
-      </button>
-
-      {/* Header */}
-      <header className="fullstack-projects__header">
-        <h1 className="fullstack-projects__title">CASTILLO DEL JEFE FINAL</h1>
-        <p className="fullstack-projects__subtitle">
-          Proyectos fullstack épicos ψ(｀∇´)ψ
-        </p>
-      </header>
-
-      {/* Carousel de proyectos */}
-      <div className="fullstack-projects__carousel-wrapper">
-        <ProjectCarousel
-          projects={FULLSTACK_PROJECTS}
-          selectedProjectId={selectedProjectId}
-          onProjectSelect={handleProjectSelect}
-        />
-      </div>
-
-      {/* Slime companion */}
-      <MapSlimeCompanion texts={getSlimeTexts()} visible={true} />
-    </section>
+    <ProjectPage
+      projects={FULLSTACK_PROJECTS}
+      pageVariant="fullstack"
+      title="CASTILLO DEL JEFE FINAL"
+      subtitle="Proyectos fullstack épicos ψ(｀∇´)ψ"
+      initialSlimeTexts={INITIAL_SLIME_TEXTS}
+      clickToOpenText="Haz click de nuevo para abrir →"
+    />
   );
 }
 
