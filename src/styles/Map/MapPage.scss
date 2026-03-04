@@ -46,17 +46,20 @@
   // ============================
   // GRID DE IMÁGENES (MÓVIL)
   // ============================
-  &__images-grid {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    opacity: 0;
-    transition: opacity 0.8s ease 1s;
-    
-    &--visible {
-      opacity: 1;
+    &__images-grid {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      opacity: 0;
+      transition: opacity 0.8s ease 1s;
+      margin: 0;
+      padding: 0;
+      border: none;
+      
+      &--visible {
+        opacity: 1;
+      }
     }
-  }
 
   &__image-container {
     width: 100%;
@@ -72,8 +75,42 @@
     width: 100%;
     height: 100%;
     display: block;
-    object-fit: cover; 
+    object-fit: cover;
     object-position: center;
+  }
+  @media (max-width: 1023px) {
+    &__images-grid {
+      display: flex;
+      flex-direction: column;
+      width: 100vw;
+      font-size: 0;
+      margin: 0;
+      padding: 0;
+      border: none;
+    }
+    &__image-container {
+      width: 100vw;
+      height: 100vw * 297 / 982;
+      min-height: 90px;
+      max-height: 100vh;
+      overflow: hidden;
+      margin: 0;
+      padding: 0;
+      border: none;
+      line-height: 0;
+      display: flex;
+    }
+    &__section-image {
+      width: 100vw;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      margin: 0;
+      padding: 0;
+      border: none;
+      line-height: 0;
+    }
   }
 
   // ============================
@@ -83,8 +120,7 @@
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
+    width: 50%;
     opacity: 0;
     transition: opacity 0.8s ease 1.2s;
     pointer-events: none;
@@ -102,14 +138,14 @@
     text-decoration: none;
     border: 3px solid var(--color-text-light);
     border-radius: 10px;
-    padding: 1.2rem 2rem;
+    padding: 0.5rem 0rem;;
     background: rgba(31, 41, 55, 0.85);
     cursor: pointer;
     transition: all 0.25s ease;
     backdrop-filter: blur(8px);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
     z-index: 10;
-    width: 85%;
+    width: 50%;
     max-width: 35rem;
     left: 50%;
     transform: translateX(-50%);
@@ -153,31 +189,36 @@
     // POSICIONES MANUALES 
     // ============================
     &--casa {
-      top: 65vh; 
+      top: 5dvh; 
     }
 
     &--bosque {
-      top: 135vh; 
+      top: 13dvh; 
+      left: 50dvh;
     }
 
     &--academia {
-      top: 240vh; 
+      top: 32dvh; 
+      left: 10dvh;
     }
 
     &--dungeon {
-      top: 325vh; 
+      top: 45dvh; 
+      left: 50dvh;
     }
 
     &--castillo {
-      top: 450vh; 
+      top: 63dvh; 
+      left: 10dvh;
     }
 
     &--jardin {
-      top: 513vh; 
+      top: 80dvh; 
+      left: 50dvh;
     }
 
     &--taberna {
-      top: 665vh; 
+      top: 100dvh; 
     }
   }
 
@@ -230,27 +271,52 @@
       RESPONSIVE - TABLET
    ============================ */
 @media (min-width: 768px) {
-  .map {
-    &__location {
-      padding: 1.8rem 3rem;
-      border-width: 4px;
-      max-width: 42rem;
-    }
+  .map__location {
+    padding: 1.8rem 3rem;
+    border-width: 4px;
+    max-width: 42rem;
 
-    &__location-text {
-      font-size: 2.6rem;
-      letter-spacing: 0.18rem;
+    &--casa {
+      top: 5dvh;
     }
-
-    &__location-badge {
-      width: 3.5rem;
-      height: 3.5rem;
-      font-size: 2rem;
-      top: -1.2rem;
-      right: -1.2rem;
+    &--bosque {
+      top: 20dvh;
+      left: 70dvh;
+    }
+    &--academia {
+      top: 40dvh;
+      left: 15dvh;
+    }
+    &--dungeon {
+      top: 65dvh;
+      left: 70dvh;
+    }
+    &--castillo {
+      top: 90dvh;
+      left: 15dvh;
+    }
+    &--jardin {
+      top: 115dvh;
+      left: 70dvh;
+    }
+    &--taberna {
+      top: 150dvh;
+      left: 15dvh;
     }
   }
+  .map__location-text {
+    font-size: 2.6rem;
+    letter-spacing: 0.18rem;
+  }
+  .map__location-badge {
+    width: 3.5rem;
+    height: 3.5rem;
+    font-size: 2rem;
+    top: -1.2rem;
+    right: -1.2rem;
+  }
 }
+
 
 /* ============================
    RESPONSIVE - DESKTOP (1024px+)
