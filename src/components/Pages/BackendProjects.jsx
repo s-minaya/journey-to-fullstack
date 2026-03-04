@@ -11,13 +11,22 @@ import "../../styles/Pages/BackendProjects.scss";
 // ============================
 const BACKEND_PROJECTS = [
   {
-    id: "harry-potter-api",
-    title: "HARRY POTTER API",
+    id: "animal-crossing-api",
+    title: "ANIMAL CROSSING API",
     description:
-      "¡Mi primera API REST! (◕‿◕) Una API completa de Animal Crossing, con Node.js, Express y MySQL. Incluye endpoints CRUD, documentación y todo lo necesario para gestionar información.",
+      "¡Mi primera API! (◕‿◕) Una API completa de Animal Crossing, con Node.js, Express y MySQL. Incluye endpoints CRUD, documentación y todo lo necesario para gestionar información.",
     url: "https://github.com/Adalab/modulo-4-evaluacion-final-bpw-s-minaya",
     image: "/images/projects/animal-crossing-api.jpg",
-    tags: ["Node.js", "Express", "MySQL", "REST API"],
+    tags: ["Node.js", "Express", "MySQL", "API"],
+  },
+    {
+    id: "testing-con-javascript",
+    title: "TESTING CON JAVASCRIPT",
+    description:
+      "Proyecto de aprendizaje de testing (▰˘◡˘▰) cubriendo desde análisis estático hasta pruebas E2E automatizadas con CI/CD en GitHub Actions",
+    url: "https://github.com/s-minaya/testing-con-javascript",
+    image: "/images/projects/testing-con-javascript.jpg",
+    tags: ["MongoDB", "Testing", "Docker", "TDD/BDD"],
   },
 ];
 

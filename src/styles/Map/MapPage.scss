@@ -138,7 +138,7 @@
     text-decoration: none;
     border: 3px solid var(--color-text-light);
     border-radius: 10px;
-    padding: 0.5rem 0rem;;
+    padding: 0.5rem 0.5rem;;
     background: rgba(31, 41, 55, 0.85);
     cursor: pointer;
     transition: all 0.25s ease;
@@ -219,12 +219,13 @@
 
     &--taberna {
       top: 100dvh; 
+      left: 50dvh;
     }
   }
 
   &__location-text {
     font-family: var(--font-main);
-    font-size: 2rem;
+    font-size: 1.5rem;
     letter-spacing: 0.15rem;
     color: var(--color-text-light);
     text-align: center;
@@ -281,7 +282,7 @@
     }
     &--bosque {
       top: 20dvh;
-      left: 70dvh;
+      left: 60dvh;
     }
     &--academia {
       top: 40dvh;
@@ -289,7 +290,7 @@
     }
     &--dungeon {
       top: 65dvh;
-      left: 70dvh;
+      left: 60dvh;
     }
     &--castillo {
       top: 90dvh;
@@ -297,11 +298,11 @@
     }
     &--jardin {
       top: 115dvh;
-      left: 70dvh;
+      left: 60dvh;
     }
     &--taberna {
       top: 150dvh;
-      left: 15dvh;
+      left: 60dvh;
     }
   }
   .map__location-text {
