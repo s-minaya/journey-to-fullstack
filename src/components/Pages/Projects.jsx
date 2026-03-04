@@ -133,14 +133,24 @@ const PROJECT_CATEGORIES = [
     subtitle: "Las profundidades del código (｡•́︿•̀｡)",
     icon: "🗝️",
     projects: [
-      {
-        id: "animal-crossing-api",
-        title: "API REST",
-        description: "API completa con Node.js, Express y MySQL.",
-        url: "https://github.com/Adalab/modulo-4-evaluacion-final-bpw-s-minaya",
-        image: "/images/projects/animal-crossing-api.jpg",
-        tags: ["Node.js", "Express", "MySQL"],
-      },
+       {
+    id: "animal-crossing-api",
+    title: "ANIMAL CROSSING API",
+    description:
+      "Una API completa de Animal Crossing.",
+    url: "https://github.com/Adalab/modulo-4-evaluacion-final-bpw-s-minaya",
+    image: "/images/projects/animal-crossing-api.jpg",
+    tags: ["Node.js", "Express", "MySQL", "API"],
+  },
+    {
+    id: "testing-con-javascript",
+    title: "TESTING CON JAVASCRIPT",
+    description:
+      "Proyecto de aprendizaje de testing",
+    url: "https://github.com/s-minaya/testing-con-javascript",
+    image: "/images/projects/testing-con-javascript.jpg",
+    tags: ["MongoDB", "Testing", "Docker", "TDD/BDD"],
+  },
     ],
   },
   {

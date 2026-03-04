@@ -89,10 +89,9 @@
       border: none;
     }
     &__image-container {
-      width: 100vw;
-      height: 100vw * 297 / 982;
+      width: 100dvw;
       min-height: 90px;
-      max-height: 100vh;
+      max-height: 100dvh;
       overflow: hidden;
       margin: 0;
       padding: 0;
