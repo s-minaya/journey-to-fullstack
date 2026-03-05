@@ -1,0 +1,662 @@
+// ==========================
+//      ABOUT CONTENT
+//       Bento grid 
+// ==========================
+
+@keyframes vinylSpin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes badgePulse {
+  0%, 100% { box-shadow: 0 0 8px rgba(250, 204, 21, 0.5); }
+  50%       { box-shadow: 0 0 18px rgba(250, 204, 21, 0.9); }
+}
+
+// ==========================
+// BENTO GRID
+// ==========================
+
+.about-content {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-areas:
+    "portrait"
+    "bio"
+    "vinyl"
+    "interests"
+    "stats";
+  gap: 1.6rem;
+  width: 100%;
+  max-width: 130rem;
+  margin: 0 auto;
+
+  // ==========================
+  // CARD BASE
+  // ==========================
+  &__card {
+    background: rgba(10, 14, 28, 0.75);
+    border: 2px solid rgba(255, 255, 255, 0.12);
+    border-radius: 4px;
+    padding: 2rem;
+    backdrop-filter: blur(12px);
+    box-shadow:
+      0 4px 24px rgba(0, 0, 0, 0.5),
+      inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    position: relative;
+    overflow: hidden;
+
+    &--portrait { grid-area: portrait; }
+    &--bio      { grid-area: bio; }
+    &--vinyl    { grid-area: vinyl; }
+    &--interests{ grid-area: interests; }
+    &--stats    { grid-area: stats; }
+  }
+
+  &__card-title {
+    font-family: var(--font-title);
+    font-size: 2.2rem;
+    letter-spacing: 0.2rem;
+    color: var(--color-text-light);
+    margin-bottom: 1.6rem;
+    text-shadow:
+      0 0 12px rgba(250, 204, 21, 0.6),
+      2px 2px 0 rgba(0, 0, 0, 0.6);
+  }
+
+  // ==========================
+  // PORTRAIT
+  // ==========================
+  &__card--portrait {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0;
+    padding: 2.4rem 2rem;
+
+    .about-content__card-title {
+      font-size: 2.8rem;
+      text-align: center;
+      margin-bottom: 1.2rem;
+    }
+  }
+
+  &__portrait-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.6rem;
+    width: 100%;
+
+    .about-content__personal-list {
+      align-self: stretch;
+      margin-top: 0.4rem;
+      padding-top: 1.4rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+    }
+  }
+
+  &__portrait-img {
+    width: 16rem;
+    height: 16rem;
+    image-rendering: pixelated;
+    display: block;
+    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.6));
+  }
+
+  &__badge {
+    font-family: var(--font-main);
+    font-size: 1.4rem;
+    letter-spacing: 0.12rem;
+    color: #fbbf24;
+    background: rgba(251, 191, 36, 0.12);
+    border: 2px solid #fbbf24;
+    border-radius: 4px;
+    padding: 0.6rem 1.4rem;
+    text-align: center;
+    animation: badgePulse 2.5s ease-in-out infinite;
+  }
+
+  // ==========================
+  // BIO
+  // ==========================
+  &__bio-text {
+    font-family: var(--font-main);
+    font-size: 1.6rem;
+    line-height: 2;
+    letter-spacing: 0.08rem;
+    color: rgba(249, 250, 251, 0.88);
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+  }
+
+  // ==========================
+  // VINYL
+  // ==========================
+  &__card--vinyl {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.4rem;
+  }
+
+  &__vinyl-link {
+    display: block;
+    text-decoration: none;
+    outline: none;
+
+    &:hover .about-content__vinyl-disc {
+      animation-play-state: paused;
+      box-shadow:
+        0 0 30px rgba(30, 215, 96, 0.5),
+        0 0 8px rgba(30, 215, 96, 0.3),
+        inset 0 0 20px rgba(0,0,0,0.4);
+    }
+  }
+
+  &__vinyl-disc {
+    width: 14rem;
+    height: 14rem;
+    border-radius: 50%;
+    background:
+      radial-gradient(circle at center,
+        #2d2d2d 0%,  #1a1a1a 15%,
+        #111     16%, #1e1e1e 24%,
+        #111     25%, #1e1e1e 35%,
+        #111     36%, #1e1e1e 50%,
+        #111     51%, #1e1e1e 65%,
+        #111     66%, #222     100%
+      );
+    animation: vinylSpin 3s linear infinite;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow:
+      0 0 16px rgba(0, 0, 0, 0.8),
+      0 2px 4px rgba(255, 255, 255, 0.05);
+    transition: box-shadow 0.3s ease;
+  }
+
+  &__vinyl-label {
+    width: 5rem;
+    height: 5rem;
+    border-radius: 50%;
+    background: radial-gradient(circle, #1ed760 0%, #17a34a 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.1rem;
+    box-shadow: 0 0 8px rgba(30, 215, 96, 0.4);
+  }
+
+  &__vinyl-label-top {
+    font-family: var(--font-title);
+    font-size: 1rem;
+    letter-spacing: 0.1rem;
+    color: #000;
+    line-height: 1;
+  }
+
+  &__vinyl-label-icon {
+    font-size: 1.2rem;
+    color: #000;
+    line-height: 1;
+  }
+
+  &__vinyl-label-bottom {
+    font-family: var(--font-main);
+    font-size: 0.8rem;
+    letter-spacing: 0.05rem;
+    color: rgba(0, 0, 0, 0.7);
+    line-height: 1;
+  }
+
+  &__vinyl-caption {
+    font-family: var(--font-main);
+    font-size: 1.4rem;
+    letter-spacing: 0.1rem;
+    color: rgba(249, 250, 251, 0.7);
+    text-align: center;
+  }
+
+  // ==========================
+  // PERSONAL
+  // ==========================
+  &__personal-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+  }
+
+  &__personal-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.2rem;
+    font-family: var(--font-main);
+    font-size: 1.5rem;
+    letter-spacing: 0.08rem;
+    color: rgba(249, 250, 251, 0.88);
+    line-height: 1.7;
+  }
+
+  &__personal-icon {
+    font-size: 1.8rem;
+    flex-shrink: 0;
+    margin-top: 0.1rem;
+    color: #fff;
+  }
+
+  &__personal-sub {
+    font-size: 1.3rem;
+    color: rgba(249, 250, 251, 0.55);
+    letter-spacing: 0.06rem;
+  }
+
+  // ==========================
+  // INTERESTS
+  // ==========================
+  &__interests-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.2rem;
+  }
+
+  &__interest-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  &__interest-icon {
+    font-size: 2rem;
+    flex-shrink: 0;
+    margin-top: 0.2rem;
+    color: #fff;
+  }
+
+  &__interest-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  &__interest-title {
+    font-family: var(--font-main);
+    font-size: 1.4rem;
+    letter-spacing: 0.1rem;
+    color: var(--color-text-light);
+    line-height: 1.2;
+  }
+
+  &__interest-desc {
+    font-family: var(--font-main);
+    font-size: 1.2rem;
+    letter-spacing: 0.05rem;
+    color: rgba(249, 250, 251, 0.6);
+    line-height: 1.4;
+  }
+
+  // ==========================
+  // STATS
+  // ==========================
+  &__stats-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.4rem;
+  }
+
+  &__stat-row {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  &__stat-label {
+    font-family: var(--font-main);
+    font-size: 1.2rem;
+    letter-spacing: 0.07rem;
+    color: rgba(249, 250, 251, 0.8);
+    text-align: center;
+  }
+
+  &__stat-bar-track {
+    width: 80%;
+    max-width: 28rem;
+    height: 1.8rem;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    overflow: hidden;
+  }
+
+  &__stat-bar-fill {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 0.5rem;
+    background: linear-gradient(90deg, #4ade80 0%, #22c55e 100%);
+    box-shadow: 0 0 6px rgba(74, 222, 128, 0.5);
+    transition: width 1s ease;
+  }
+
+  &__stat-value {
+    font-family: var(--font-title);
+    font-size: 1.1rem;
+    color: rgba(0, 0, 0, 0.8);
+    font-weight: bold;
+    letter-spacing: 0.03rem;
+    line-height: 1;
+  }
+}
+
+/* ============================
+   RESPONSIVE - TABLET
+   ============================ */
+@media (min-width: 768px) {
+  .about-content {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "portrait bio"
+      "vinyl    stats"
+      "interests interests";
+    gap: 2rem;
+
+    &__card--portrait {
+      min-height: 28rem;
+    }
+
+    &__portrait-img {
+      width: 18rem;
+      height: 18rem;
+    }
+
+    &__badge {
+      font-size: 1.6rem;
+    }
+
+    &__bio-text {
+      font-size: 1.8rem;
+    }
+
+    &__vinyl-disc {
+      width: 16rem;
+      height: 16rem;
+    }
+
+    &__vinyl-label {
+      width: 6rem;
+      height: 6rem;
+    }
+
+    &__vinyl-label-top {
+      font-size: 1.1rem;
+    }
+
+    &__vinyl-label-icon {
+      font-size: 1.4rem;
+    }
+
+    &__vinyl-label-bottom {
+      font-size: 0.9rem;
+    }
+
+    &__vinyl-caption {
+      font-size: 1.6rem;
+    }
+
+    &__personal-item {
+      font-size: 1.7rem;
+    }
+
+    &__personal-sub {
+      font-size: 1.4rem;
+    }
+
+    &__interest-title {
+      font-size: 1.6rem;
+    }
+
+    &__interest-desc {
+      font-size: 1.3rem;
+    }
+
+    &__stat-label {
+      font-size: 1.4rem;
+    }
+
+    &__stat-bar-track {
+      max-width: 34rem;
+      height: 2rem;
+    }
+
+    &__stat-value {
+      font-size: 1.3rem;
+    }
+
+    &__card-title {
+      font-size: 2.6rem;
+    }
+  }
+}
+
+/* ============================
+   RESPONSIVE - DESKTOP
+   ============================ */
+@media (min-width: 1024px) {
+  .about-content {
+    grid-template-columns: 26rem 1fr 28rem;
+    grid-template-areas:
+      "portrait bio       bio"
+      "portrait vinyl     stats"
+      "portrait interests interests";
+    gap: 2.4rem;
+
+    &__portrait-img {
+      width: 20rem;
+      height: 20rem;
+    }
+
+    &__badge {
+      font-size: 1.8rem;
+    }
+
+    &__bio-text {
+      font-size: 2rem;
+      line-height: 2.2;
+    }
+
+    &__vinyl-disc {
+      width: 18rem;
+      height: 18rem;
+    }
+
+    &__vinyl-label {
+      width: 7rem;
+      height: 7rem;
+    }
+
+    &__vinyl-label-top {
+      font-size: 1.3rem;
+    }
+
+    &__vinyl-label-icon {
+      font-size: 1.6rem;
+    }
+
+    &__vinyl-caption {
+      font-size: 1.8rem;
+    }
+
+    &__personal-item {
+      font-size: 2rem;
+    }
+
+    &__personal-icon {
+      font-size: 2.2rem;
+    }
+
+    &__personal-sub {
+      font-size: 1.6rem;
+    }
+
+    &__card--portrait {
+      padding: 3rem 2.8rem;
+
+      .about-content__card-title {
+        font-size: 3.2rem;
+        margin-bottom: 2rem;
+      }
+    }
+
+    &__portrait-body {
+      gap: 2.2rem;
+
+      .about-content__personal-list {
+        gap: 1.6rem;
+        padding-top: 2rem;
+        margin-top: 0.8rem;
+      }
+    }
+
+    &__interests-grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.6rem;
+    }
+
+    &__interest-icon {
+      font-size: 2.4rem;
+    }
+
+    &__interest-title {
+      font-size: 1.7rem;
+    }
+
+    &__interest-desc {
+      font-size: 1.4rem;
+    }
+
+    &__stat-row {
+      align-items: stretch;
+      gap: 0.5rem;
+    }
+
+    &__stat-label {
+      font-size: 1.5rem;
+      text-align: left;
+    }
+
+    &__stat-bar-track {
+      width: 100%;
+      max-width: none;
+      height: 2.2rem;
+    }
+
+    &__stat-value {
+      font-size: 1.4rem;
+    }
+
+    &__card-title {
+      font-size: 3rem;
+      margin-bottom: 2rem;
+    }
+  }
+}
+
+/* ============================
+   RESPONSIVE - LARGE DESKTOP
+   ============================ */
+@media (min-width: 1440px) {
+  .about-content {
+    grid-template-columns: 30rem 1fr 32rem;
+    gap: 2.8rem;
+
+    &__portrait-img {
+      width: 24rem;
+      height: 24rem;
+    }
+
+    &__bio-text {
+      font-size: 2.2rem;
+    }
+
+    &__vinyl-disc {
+      width: 22rem;
+      height: 22rem;
+    }
+
+    &__vinyl-label {
+      width: 8rem;
+      height: 8rem;
+    }
+
+    &__vinyl-label-top {
+      font-size: 1.5rem;
+    }
+
+    &__vinyl-label-icon {
+      font-size: 1.8rem;
+    }
+
+    &__card-title {
+      font-size: 3.4rem;
+    }
+
+    &__personal-item {
+      font-size: 2.2rem;
+    }
+
+    &__personal-icon {
+      font-size: 2.4rem;
+    }
+
+    &__personal-sub {
+      font-size: 1.8rem;
+    }
+
+    &__card--portrait {
+      padding: 3.6rem 3.2rem;
+
+      .about-content__card-title {
+        font-size: 3.6rem;
+        margin-bottom: 2.4rem;
+      }
+    }
+
+    &__portrait-body {
+      gap: 2.6rem;
+
+      .about-content__personal-list {
+        gap: 2rem;
+        padding-top: 2.4rem;
+        margin-top: 1rem;
+      }
+    }
+
+    &__interest-title {
+      font-size: 1.9rem;
+    }
+
+    &__interest-desc {
+      font-size: 1.5rem;
+    }
+
+    &__stat-label {
+      font-size: 1.7rem;
+      min-width: 0;
+    }
+
+    &__stat-bar-track {
+      height: 2.6rem;
+    }
+
+    &__stat-value {
+      font-size: 1.6rem;
+    }
+  }
+}
